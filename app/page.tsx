@@ -1,10 +1,13 @@
 'use client'
 
-import TaskCard from '@/components/TaskCard'
-
+import { useState } from 'react'
 import Column from '@/components/Column'
+import CreateTaskModal from '@/components/CreateTaskModal'
 
 export default function Home() {
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className='p-10'>
       <Column
@@ -30,7 +33,15 @@ export default function Home() {
             created_at: '2026-05-18'
           }
         ]}
-        onAddTask={() => {}}
+        onAddTask={() => {setIsModalOpen(true)}}
+      />
+      <CreateTaskModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={data => {
+          console.log(data)
+          setIsModalOpen(false)
+        }}
       />
     </div>
   )
