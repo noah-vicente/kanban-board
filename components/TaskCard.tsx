@@ -4,6 +4,7 @@ import type { Task } from '@/lib/types'
 
 interface Props {
     task: Task
+    onSelect: (task: Task) => void
 }
 
 // Maps each priority value to a pair of Tailwind classes (background + text color).
@@ -14,10 +15,12 @@ const priorityStyles = {
     low: 'bg-green-100 text-green-700',
 }
 
-export default function TaskCard({task}: Props){
+export default function TaskCard({task, onSelect}: Props){
     return (
         // Outer card — white background, soft border, rounded corners, subtle shadow
-        <div className='bg-background border border-border rounded-xl p-4 shadow-lg flex flex-col gap-3'>
+        <div onClick={() => onSelect(task)}
+            className='bg-background border border-border rounded-xl p-4 
+            shadow-lg flex flex-col gap-3 cursor-pointer hover:shadow-xl transition'>
 
             {/* Metadata row — colored header strip with priority badge and due date */}
             <div className='bg-header rounded-t-xl p-4 -mx-4 -mt-4 flex items-center justify-between border-b border-border pb-3'>

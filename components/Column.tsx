@@ -7,11 +7,12 @@ interface Props {
     title: string       // column heading (e.g. "To Do", "In Progress")
     tasks: Task[]       // array of tasks that belong to this column
     onAddTask: () => void   // callback fired when the user clicks "+ Add Task"
+    onTaskClick: (task: Task) => void
 }
 
 // Renders a single Kanban column with a header, a list of task cards, and an add button.
 // The same component is reused for all four columns — only the props differ.
-export default function Column({title, tasks, onAddTask}: Props) {
+export default function Column({title, tasks, onAddTask, onTaskClick}: Props) {
     return (
         <div className='bg-surface border-border w-72'>
 
@@ -26,7 +27,7 @@ export default function Column({title, tasks, onAddTask}: Props) {
                 The key prop is required by React to efficiently track list items. */}
             <div className='flex flex-col gap-3 p-4'>
                 {tasks.map((task) => (
-                    <TaskCard key={task.id} task={task} />
+                    <TaskCard key={task.id} task={task} onSelect={onTaskClick}/>
                 ))}
             </div>
 
